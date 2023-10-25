@@ -27,6 +27,7 @@ function App() {
         (sc) => sc["$ref"] === undefined
       );
       content.components.schemas[key] = {
+        ...fixedschema,
         properties: {
           ...fixedschema.properties,
           legalType: { maxLength: 255, type: "string" }
