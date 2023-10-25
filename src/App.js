@@ -22,15 +22,17 @@ function App() {
     const keyList = ['IndividualEntrepreneur', 'LegalEntity', 'PhysicalPerson'];
 
     keyList.forEach((key) => {
-      const individualEntrepreneurSchema = content.components.schemas[key];
-      const fixedIndividualEntrepreneurSchema = individualEntrepreneurSchema.allOf.find(
+      const schema = content.components.schemas[key];
+      const fixedschema = schema.allOf.find(
         (sc) => sc["$ref"] === undefined
       );
       content.components.schemas[key] = {
-        ...fixedIndividualEntrepreneurSchema,
-        description: individualEntrepreneurSchema.description,
+        ...fixedschema,
+        description: schema.description,
       };
     });
+
+    delete content.components.schemas['PrincipalUpdate'].required;
 
     return content;
   };
